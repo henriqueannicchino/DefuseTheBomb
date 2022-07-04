@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { useLocation } from "react-router-dom";
+import Clock from "../../components/clock/clock";
 import FormTest from "../../components/formTest/formTest";
 
 export default function PreTest() {
@@ -14,35 +15,26 @@ export default function PreTest() {
         hour: 0, minute: 0, second: 0
     });
 
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setStopwatch({
-                second: stopWatch.second === 59? 0: stopWatch.second+1,
-                minute: stopWatch.second === 59 && stopWatch.minute < 59? stopWatch.minute+1: stopWatch.second < 59? stopWatch.minute : 0,
-                hour: stopWatch.minute === 59? stopWatch.hour+1: stopWatch.hour
-            });
-        }, 1000);
-        return () => clearInterval(interval);
-    }, [stopWatch]);
+    var startDate = new Date();
 
     useEffect(() => {
         if(location.state) {
             setLocationState(location.state);
         }
-
+        
     }, [location]);
 
     
     
     return(
         <div>
-            <h1>{stopWatch.hour}:{stopWatch.minute}:{stopWatch.second}</h1>
+            <Clock startDate={startDate}/>
             {
                 locationState.arithmeticOpts.length > 0 
                 ? <p>{locationState.arithmeticOpts[0].name}</p>
                 : <></>
             }
-            <FormTest/>
+            <FormTest arithmeticOpts={["Soma"]} sizeOpts={1} algorithmismSize={1}/>
         </div>
     );
 };

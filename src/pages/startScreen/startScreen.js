@@ -8,6 +8,7 @@ import "./startScreen.css";
 export default function StartScreen(){
 
     const [play, setPlay] = useState(false);
+    const [play2, setPlay2] = useState(false);
     const [brief, setBrief] = useState(false);
     const [arithmeticOpts, setArithmeticOpts] = useState([
         {name: "Soma", checked: false},
@@ -15,6 +16,7 @@ export default function StartScreen(){
         {name: "Multiplicação", checked: false},
         {name: "Divisão", checked: false},
     ]);
+    const [algorithmismSize, setAlgorithmismSize] = useState(1);
 
     const handleChangeOpt = (position) => {
         const updatedArithmeticOpts = arithmeticOpts.map((opt, index) =>
@@ -22,7 +24,10 @@ export default function StartScreen(){
         );
 
         setArithmeticOpts(updatedArithmeticOpts);
+    }
 
+    const handleAlgorithmismAmount = (e) => {
+        setAlgorithmismSize(e.target.value);
     }
 
     function renderArithmeticOpts(opt, index){
@@ -39,16 +44,25 @@ export default function StartScreen(){
         );
     };
 
-    function openBriefPopup(){
+
+    function openSecondPopup(){
 
         for(let index=0; index<arithmeticOpts.length; index++){
             if(arithmeticOpts[index].checked === true){
                 setPlay(false);
-                setBrief(true);
+                setPlay2(true);
+                setBrief(false);
                 break;
             }
         }
 
+    }
+
+
+    function openBriefPopup(){
+        setPlay(false);
+        setPlay2(false);
+        setBrief(true);
     }
 
     return(
@@ -72,11 +86,35 @@ export default function StartScreen(){
                         arithmeticOpts.map(renderArithmeticOpts)
                     }
                     
-                    <button onClick={() => openBriefPopup()}>Continuar</button>
+                    <button onClick={() => openSecondPopup()}>Continuar</button>
                     
                 </div>
             </Popup>
 
+            <Popup trigger={play2} setTrigger={setPlay2} maxWidth="200px">
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <h3>Escolha a quantidade máxima de algorismo nos números</h3>
+                    
+                    <div className="radioBox">
+                        <label>
+                            <input type="radio" value="1" onChange={handleAlgorithmismAmount} checked={algorithmismSize==="1" ? true : false} /> 
+                            1 algorismo
+                        </label>
+                        <label>
+                            <input type="radio" value="2" onChange={handleAlgorithmismAmount} checked={algorithmismSize==="2" ? true : false} /> 
+                            2 algorismos
+                        </label>
+                        <label>
+                            <input type="radio" value="3" onChange={handleAlgorithmismAmount} checked={algorithmismSize==="3" ? true : false} /> 
+                            3 algorismos
+                        </label>
+                    </div>
+                    
+                    <button onClick={() => openBriefPopup()}>Continuar</button>
+                    
+                </div>
+            </Popup>
+            
             <Popup trigger={brief} setTrigger={setBrief} maxWidth="250px">
                 <div style={{display: "flex", flexDirection: "column"}}>
                     <p>
@@ -85,7 +123,7 @@ export default function StartScreen(){
                         agora é seu trabalho como um agente do esquadrão anti bombas tentar desarmar a
                         bomba antes que o tempo acabe.
                     </p>
-                    <Link to="/pre" state={{arithmeticOpts:arithmeticOpts}}>
+                    <Link to="/pre" state={{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}}>
                         <button style={{width: "100%"}}>Continuar</button>
                     </Link>
                 </div>

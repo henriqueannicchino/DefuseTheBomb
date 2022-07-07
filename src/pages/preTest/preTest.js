@@ -11,10 +11,6 @@ export default function PreTest() {
         arithmeticOpts: []
     });
 
-    const [stopWatch, setStopwatch] = useState({
-        hour: 0, minute: 0, second: 0
-    });
-
     var startDate = new Date();
 
     useEffect(() => {
@@ -29,12 +25,12 @@ export default function PreTest() {
     return(
         <div>
             <Clock startDate={startDate}/>
-            {
+            {/*
                 locationState.arithmeticOpts.length > 0 
                 ? <p>{locationState.arithmeticOpts[0].name}</p>
                 : <></>
-            }
-            <FormTest arithmeticOpts={["Soma"]} sizeOpts={1} algorithmismSize={1}/>
+            */}
+            <FormTest arithmeticOpts={["Soma", "Subtração"]} sizeOpts={2} algorithmismSize={1}/>
         </div>
     );
 };

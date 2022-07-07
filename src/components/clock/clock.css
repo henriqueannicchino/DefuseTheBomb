@@ -1,8 +1,9 @@
 .clock {
-    width: 95vw;
+    width: 100vw;
     height: 10vw;
     overflow: hidden;
     text-align: center;
+    background: #EDEDEE;
 }
 
 .clock h1 {

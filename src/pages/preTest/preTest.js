@@ -8,7 +8,7 @@ export default function PreTest() {
     const location =  useLocation();
 
     const [locationState, setLocationState] = useState({
-        arithmeticOpts: []
+        arithmeticOpts: [], algorithmismSize: ''
     });
 
     var startDate = new Date();
@@ -23,14 +23,15 @@ export default function PreTest() {
     
     
     return(
-        <div>
+        <div style={{backgroundColor:"#EDEDEE"}}>
             <Clock startDate={startDate}/>
-            {/*
-                locationState.arithmeticOpts.length > 0 
-                ? <p>{locationState.arithmeticOpts[0].name}</p>
-                : <></>
-            */}
-            <FormTest arithmeticOpts={["Soma", "Subtração"]} sizeOpts={2} algorithmismSize={1}/>
+
+            <FormTest 
+                arithmeticOpts={locationState.arithmeticOpts} 
+                sizeOpts={locationState.arithmeticOpts.length} 
+                algorithmismSize={locationState.algorithmismSize}
+                preTest={true}
+            />
         </div>
     );
 };

@@ -18,12 +18,26 @@ export default function StartScreen(){
     ]);
     const [algorithmismSize, setAlgorithmismSize] = useState(1);
 
+    let [arithmeticOptsArray, setArithmeticOptsArray] = useState([]);
+
     const handleChangeOpt = (position) => {
+
+        let arithmeticOptsArrayTemp = arithmeticOptsArray;
+
+        if(arithmeticOptsArrayTemp.indexOf(arithmeticOpts[position].name) === -1){
+            arithmeticOptsArrayTemp.push(arithmeticOpts[position].name);
+        }
+        else{
+            let arithmeticIndex = arithmeticOptsArrayTemp.findIndex(arithmeticOpt => arithmeticOpt === arithmeticOpts[position].name);
+            arithmeticOptsArrayTemp.splice(arithmeticIndex, 1);
+        }
+
         const updatedArithmeticOpts = arithmeticOpts.map((opt, index) =>
             index === position ? {name: opt.name, checked: !opt.checked} : {name: opt.name, checked: opt.checked}
         );
 
         setArithmeticOpts(updatedArithmeticOpts);
+        setArithmeticOptsArray(arithmeticOptsArrayTemp);
     }
 
     const handleAlgorithmismAmount = (e) => {
@@ -66,7 +80,7 @@ export default function StartScreen(){
     }
 
     return(
-        <div className="mainDiv">
+        <div className="mainDiv" style={{background: "linear-gradient(rgba(136,17,7,0.5), rgba(195,18,0,255), black)"}}>
             <div className="menu">
                 <h1>Desarme a Bomba</h1>
                 <div className="buttons">
@@ -123,7 +137,7 @@ export default function StartScreen(){
                         agora é seu trabalho como um agente do esquadrão anti bombas tentar desarmar a
                         bomba antes que o tempo acabe.
                     </p>
-                    <Link to="/pre" state={{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}}>
+                    <Link to="/pre" state={{arithmeticOpts:arithmeticOptsArray, algorithmismSize: algorithmismSize}}>
                         <button style={{width: "100%"}}>Continuar</button>
                     </Link>
                 </div>

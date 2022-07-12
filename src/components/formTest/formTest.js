@@ -1,11 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
+
 import './formTest.css';
 
 export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, preTest}) {
 
     const amountQuestions = [0,1,2,3,4,5,6,7,8,9];
     const history = useNavigate();
+
+
+   
 
     function arithmetic(operation, num1, num2){
         switch(operation) {
@@ -191,13 +195,16 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                 )
             }
        }  
-    }
+    } 
 
     function handleSubmit(e){
         e.preventDefault();
 
         if(preTest===true){
             history('/bomb', {state:{arithmeticOpts: arithmeticOpts, algorithmismSize: algorithmismSize}});
+        }
+        else{
+            history('/', {state:{arithmeticOpts: arithmeticOpts, algorithmismSize: algorithmismSize}});
         }
     }
 
@@ -207,7 +214,7 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                 <form className="form" onSubmit={handleSubmit}>
                     {amountQuestions.map(renderQuestions)}
 
-                    <button className="button" type="submit">Continuar</button>
+                    <button className="button" type="submit">{preTest===true?"Continuar":"Ir para o menu principal"}</button>
                 </form>
             </div>
         </div>

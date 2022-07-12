@@ -1,7 +1,7 @@
 import { useState } from "react";
 import './timer.css';
 
-export default function Timer({endDate, updateBomb}) {
+export default function Timer({endDate}) {
     
     const [currentTime, setCurrentTime] =  useState("0:0:0");
     //console.log(startDate);
@@ -14,7 +14,6 @@ export default function Timer({endDate, updateBomb}) {
         if(time>0 && endDate < date2){
             time=0;
             localStorage.setItem('bombExploded', true);
-            updateBomb();
         }
         else{
             localStorage.setItem('bombExploded', false);

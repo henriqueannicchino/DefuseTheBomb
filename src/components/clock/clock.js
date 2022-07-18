@@ -1,10 +1,11 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import './clock.css';
 
 export default function Clock({startDate}) {
     
     const [currentTime, setCurrentTime] =  useState("0:0:0");
-    //console.log(startDate);
+    const location =  useLocation();
 
     const updateTime = () => {
         const date2 = new Date();
@@ -24,10 +25,14 @@ export default function Clock({startDate}) {
         let seconds = parseInt(time % 60);
 
         setCurrentTime(`${hours}:${minutes}:${seconds}`);
-        localStorage.setItem('preTime', `${hours}:${minutes}:${seconds}`);
+        if(location.pathname==="/pre")
+            localStorage.setItem('preTime', `${hours}:${minutes}:${seconds}`);
+        else
+            localStorage.setItem('posTime', `${hours}:${minutes}:${seconds}`);
     }
     
-    setInterval(updateTime, 1000);
+    if(location.pathname==="/pre" || location.pathname==="/pos")
+        setInterval(updateTime, 1000);
 
     return (
         <div className="clock">

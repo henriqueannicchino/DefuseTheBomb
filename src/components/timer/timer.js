@@ -11,7 +11,7 @@ export default function Timer({endDate}) {
 
         // get total seconds between the times
         let time = Math.abs(endDate - date2) / 1000;
-        if(time>0 && endDate < date2){
+        if(time>0 && endDate < date2 || localStorage.getItem('wrongAnswer') === "true"){
             time=0;
             localStorage.setItem('bombExploded', true);
         }

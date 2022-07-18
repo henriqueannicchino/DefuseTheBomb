@@ -6,6 +6,15 @@ import Popup from "../../components/popUp/popUp";
 import "./startScreen.css";
 
 export default function StartScreen(){
+    localStorage.removeItem("wrongAnswer");
+    localStorage.removeItem("bombTime");
+    localStorage.removeItem("userAnswer");
+    localStorage.removeItem("correctAnswer");
+    localStorage.removeItem("bombExploded");
+    localStorage.removeItem("preTime");
+    localStorage.removeItem("magicNum");
+    localStorage.removeItem("bombNum");
+    localStorage.removeItem("posTime");
 
     const [play, setPlay] = useState(false);
     const [play2, setPlay2] = useState(false);

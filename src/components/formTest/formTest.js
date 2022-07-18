@@ -8,9 +8,6 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
     const amountQuestions = [0,1,2,3,4,5,6,7,8,9];
     const history = useNavigate();
 
-
-   
-
     function arithmetic(operation, num1, num2){
         switch(operation) {
             case 'Soma':

@@ -115,12 +115,16 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
             }
         }
         if(arithmeticOpts[arithmeticOpt]==="Multiplicação"){
+            if(num1===0)
+                num1++;
+            if(num2===0)
+                num2++;
             const num3 = arithmetic(arithmeticOpts[arithmeticOpt], num1, num2);
             if(posInput===0){
                 localStorage.setItem('magicNum', num1);
                 return(
                     <div key={index}>
-                        <input type="number" required></input>
+                        <input type="number" required onChange={handleChange}></input>
                         <span>*</span>
                         <span>{num2}</span>
                         <span>=</span>
@@ -134,7 +138,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
                     <div key={index}>
                         <span>{num1}</span>
                         <span>*</span>
-                        <input type="number" required></input>
+                        <input type="number" required onChange={handleChange}></input>
                         <span>=</span>
                         <span>{num3}</span>
                     </div>
@@ -148,7 +152,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
                         <span>*</span>
                         <span>{num2}</span>
                         <span>=</span>
-                        <input type="number" required></input>
+                        <input type="number" required onChange={handleChange}></input>
                     </div>
                 )
             }
@@ -168,7 +172,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
                 localStorage.setItem('magicNum', num1);
                 return(
                     <div key={index}>
-                        <input type="number" required></input>
+                        <input type="number" required onChange={handleChange}></input>
                         <span>/</span>
                         <span>{num2}</span>
                         <span>=</span>
@@ -182,7 +186,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
                     <div key={index}>
                         <span>{num1}</span>
                         <span>/</span>
-                        <input type="number" required></input>
+                        <input type="number" required onChange={handleChange}></input>
                         <span>=</span>
                         <span>{num3}</span>
                     </div>
@@ -196,7 +200,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
                         <span>/</span>
                         <span>{num2}</span>
                         <span>=</span>
-                        <input type="number" required></input>
+                        <input type="number" required onChange={handleChange}></input>
                     </div>
                 )
             }

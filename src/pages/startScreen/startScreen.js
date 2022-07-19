@@ -116,20 +116,20 @@ export default function StartScreen(){
 
             <Popup trigger={play2} setTrigger={setPlay2} maxWidth="200px">
                 <div style={{display: "flex", flexDirection: "column"}}>
-                    <h3>Escolha a quantidade máxima de algorismo nos números</h3>
+                    <h3>Escolha a quantidade máxima de algarismo nos números</h3>
                     
                     <div className="radioBox">
                         <label>
                             <input type="radio" value="1" onChange={handleAlgorithmismAmount} checked={algorithmismSize==="1" ? true : false} /> 
-                            1 algorismo
+                            1 algarismo
                         </label>
                         <label>
                             <input type="radio" value="2" onChange={handleAlgorithmismAmount} checked={algorithmismSize==="2" ? true : false} /> 
-                            2 algorismos
+                            2 algarismos
                         </label>
                         <label>
                             <input type="radio" value="3" onChange={handleAlgorithmismAmount} checked={algorithmismSize==="3" ? true : false} /> 
-                            3 algorismos
+                            3 algarismos
                         </label>
                     </div>
                     

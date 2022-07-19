@@ -3,14 +3,12 @@ import { useLocation } from "react-router-dom";
 import Timer from "../../components/timer/timer";
 import BombImg from "../../components/bombImg/bombImg";
 import RenderQuestion from "../../components/renderQuestion/renderQuestion";
-import { useNavigate } from "react-router-dom";
 import './bomb.css';
 
 
 export default function Bomb() {
 
     const location =  useLocation();
-    const history = useNavigate();
 
     var endDate = new Date();
     endDate.setSeconds(endDate.getSeconds() + 32);
@@ -33,16 +31,9 @@ export default function Bomb() {
         const userAnswer = localStorage.getItem('userAnswer');
 
         if(magicNum === userAnswer) {
-            const bombNum = parseInt(localStorage.getItem('bombNum'));
-            if(bombNum < 10){
-                localStorage.setItem('bombNum', bombNum+1);
-                window.location.reload();
-            }
-            else{
-                history('/pos', {state:{arithmeticOpts: locationState.arithmeticOpts, algorithmismSize: locationState.algorithmismSize}});
-            }
+            localStorage.setItem('correctAnswer', true);
         }
-        else { 
+        else {
             localStorage.setItem('wrongAnswer', true);
         } 
     }

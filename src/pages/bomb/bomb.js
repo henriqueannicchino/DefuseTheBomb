@@ -22,6 +22,9 @@ export default function Bomb() {
             setLocationState(location.state);
             localStorage.setItem('wrongAnswer', false);
             localStorage.setItem('correctAnswer', false);
+            localStorage.setItem('bombExploded', false);
+            localStorage.setItem('playDefuseBomb', false);
+            localStorage.setItem('playBeep', false);
         }
         
     }, [location]);

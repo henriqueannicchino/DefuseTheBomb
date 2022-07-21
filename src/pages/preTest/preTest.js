@@ -17,6 +17,7 @@ export default function PreTest() {
         if(location.state) {
             setLocationState(location.state);
             localStorage.setItem('bombNum', 1);
+            localStorage.setItem('refresh', true);
         }
         
     }, [location]);

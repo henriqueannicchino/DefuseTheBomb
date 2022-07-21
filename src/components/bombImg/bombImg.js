@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Bomb_defused from "../../assets/Sound/Bomb_has_been_defused.mp3";
 import Popup from "../popUp/popUp";
 
 import './bombImg.css';
@@ -9,6 +10,8 @@ import bomb from "../../assets/Gifs/bomb.gif";
 import explosion from "../../assets/Images/explosion.png";
 
 export default function BombImg({arithmeticOpts, algorithmismSize}) {
+    let bombDefusedSound = new Audio(Bomb_defused);
+
     const history = useNavigate();
     
     const [bombExploded, setBombExploded] =  useState(false);
@@ -16,7 +19,7 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
     const [correctPopUp, setCorrectPopUp] = useState(false);
 
     const updateBomb = () => {
-        if(localStorage.getItem('correctAnswer') !== "true"){
+        if(localStorage.getItem('correctAnswer') === "false"){
             if(localStorage.getItem('bombExploded') === "false"){
                 setBombExploded(false);
             }
@@ -26,11 +29,16 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
             }
         }
         else {
+            if(localStorage.getItem('playDefuseBomb') === "false"){
+                localStorage.setItem('playDefuseBomb', true);
+                bombDefusedSound.play();
+                clearInterval(interval);
+            }
             setCorrectPopUp(true);
         }
     }
     
-    setInterval(updateBomb, 1000);
+    let interval = setInterval(updateBomb, 1000);
 
     function handlePopUp(){
 
@@ -40,7 +48,12 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
             window.location.reload();
         }
         else{
-            history('/pos', {state:{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}});
+            if(bombNum < 4){
+                history('/');
+            }
+            else{
+                history('/pos', {state:{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}});
+            }
         }
         
     }
@@ -55,17 +68,25 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
 
             <Popup trigger={gameOverPopUp} setTrigger={setGameOverPopUp} maxWidth="200px">
                 <div style={{display: "flex", flexDirection: "column"}}>
-                    <h3>Game Over</h3>
+                    <h3>Você não conseguiu desarmar a bomba</h3>
                     
-                    <Link to="/pos" state={{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}}>
-                        <button className="buttonOver" >Continuar</button>
-                    </Link>
+                    {
+                        parseInt(localStorage.getItem('bombNum')) < 4 
+                        ?
+                        <Link to="/">
+                            <button className="buttonOver" >Continuar</button>
+                        </Link>
+                        :
+                        <Link to="/pos" state={{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}}>
+                            <button className="buttonOver" >Continuar</button>
+                        </Link>
+                    }
                 </div>
             </Popup>
 
             <Popup trigger={correctPopUp} setTrigger={setCorrectPopUp} maxWidth="200px">
                 <div style={{display: "flex", flexDirection: "column"}}>
-                    <h3>Parabéns</h3>
+                    <h3>bomba desarmada com sucesso</h3>
                     
                     <button className="button" onClick={()=>handlePopUp()}>Continuar</button>
                 </div>

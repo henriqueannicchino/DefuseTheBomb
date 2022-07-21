@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 import Popup from "../../components/popUp/popUp";
@@ -15,10 +16,14 @@ export default function StartScreen(){
     localStorage.removeItem("magicNum");
     localStorage.removeItem("bombNum");
     localStorage.removeItem("posTime");
+    localStorage.removeItem("playBeep");
+    localStorage.removeItem("playDefuseBomb");
+
 
     const [play, setPlay] = useState(false);
     const [play2, setPlay2] = useState(false);
     const [brief, setBrief] = useState(false);
+    const [howToPlay, setHowToPlay] = useState(false);
     const [arithmeticOpts, setArithmeticOpts] = useState([
         {name: "Soma", checked: false},
         {name: "Subtração", checked: false},
@@ -28,6 +33,11 @@ export default function StartScreen(){
     const [algorithmismSize, setAlgorithmismSize] = useState(1);
 
     let [arithmeticOptsArray, setArithmeticOptsArray] = useState([]);
+
+    if(localStorage.getItem('refresh') === "true"){
+        localStorage.removeItem("refresh");
+        window.location.reload();
+    }
 
     const handleChangeOpt = (position) => {
 
@@ -81,7 +91,6 @@ export default function StartScreen(){
 
     }
 
-
     function openBriefPopup(){
         setPlay(false);
         setPlay2(false);
@@ -90,13 +99,14 @@ export default function StartScreen(){
 
     return(
         <div className="mainDiv" style={{background: "linear-gradient(rgba(136,17,7,0.5), rgba(195,18,0,255), black)"}}>
+            
             <div className="menu">
                 <h1>Desarme a Bomba</h1>
                 <div className="buttons">
                     <button onClick={() => setPlay(true)}>
                         JOGAR
                     </button>
-                    <button>
+                    <button onClick={() => setHowToPlay(true)}>
                         COMO JOGAR
                     </button>
                 </div>
@@ -149,6 +159,27 @@ export default function StartScreen(){
                     <Link to="/pre" state={{arithmeticOpts:arithmeticOptsArray, algorithmismSize: algorithmismSize}}>
                         <button style={{width: "100%"}}>Continuar</button>
                     </Link>
+                </div>
+            </Popup>
+
+            <Popup trigger={howToPlay} setTrigger={setHowToPlay} maxWidth="250px">
+                <div style={{display: "flex", flexDirection: "column"}}>
+                    <span><strong>Passo 1:</strong> Clique no botão jogar.</span>
+                    <span><strong>Passo 2:</strong> Marque as Operações que deseja praticar e em seguida clique em Continuar.</span>
+                    <span><strong>Passo 3:</strong> Selecione a quantide máxima de digítos que deseja.</span>
+                    <span><strong>Passo 4:</strong> Tente resolver as operações do aquecimento antes da bomba para se preparar, não há limite de tempo nessa fase</span>
+                    <span>
+                        <strong>Passo 5:</strong> 
+                        Insira o valor que esteja faltando na operação da bomba para continuar, 
+                        serão exibidas um total de dez bombas cada uma com um tempo limite de 30 segundos,
+                        as operações serão baseadas nas repostas dadas nos passos 2 e 3.
+                    </span>
+                    <span>
+                        <strong>Passo 6:</strong> 
+                        Caso tenha conseguido desarmar pelo menos quatro bombas você será direcionado para uma nova lista de operações, 
+                        para se manter preparado e rápido para situações futuras em que se necessite de um raciocínio lógico mais acelerado, 
+                        não há limite de tempo nessa fase
+                    </span>
                 </div>
             </Popup>
         </div>

@@ -43,23 +43,19 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
     function handlePopUp(){
 
         const bombNum = parseInt(localStorage.getItem('bombNum'));
-        if(bombNum < 10){
-            localStorage.setItem('bombNum', bombNum+1);
+        localStorage.setItem('bombNum', bombNum+1);
+        if(bombNum < 9){
             window.location.reload();
         }
         else{
-            if(bombNum < 4){
-                history('/');
-            }
-            else{
-                history('/pos', {state:{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}});
-            }
+            history('/pos', {state:{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}});
         }
         
     }
 
     return (
         <div>
+            {console.log(localStorage.getItem('bombNum'))}
             {
                 bombExploded === false
                 ? <img src={bomb} alt="bomb" className="img" />
@@ -71,10 +67,10 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
                     <h3>Você não conseguiu desarmar a bomba</h3>
                     
                     {
-                        parseInt(localStorage.getItem('bombNum')) < 4 
+                        parseInt(localStorage.getItem('bombNum')) < 5 
                         ?
                         <Link to="/">
-                            <button className="buttonOver" >Continuar</button>
+                            <button className="buttonOver" >Menu principal</button>
                         </Link>
                         :
                         <Link to="/pos" state={{arithmeticOpts:arithmeticOpts, algorithmismSize: algorithmismSize}}>

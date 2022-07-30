@@ -7,6 +7,8 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
 
     const amountQuestions = [0,1,2,3,4,5,6,7,8,9];
     const history = useNavigate();
+    var numOp = [];
+    var testResult = [];
 
     function arithmetic(operation, num1, num2){
         switch(operation) {
@@ -26,6 +28,7 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
     function renderQuestions(Data, index){
         
         let maxNum = 10, num1=1, num2=1;
+
         if(algorithmismSize!==NaN){
             maxNum = Math.pow(10,(parseInt(algorithmismSize)));
 
@@ -34,13 +37,19 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
         }
         let posInput = Math.floor(Math.random() * (4 - 1)) + 1;
         const arithmeticOpt = Math.floor(Math.random() * (sizeOpts - 0)) + 0;
-        //console.log(arithmeticOpts[0]);
         if(arithmeticOpts[arithmeticOpt]==="Soma"){
             const num3 = arithmetic(arithmeticOpts[arithmeticOpt], num1, num2);
             if(posInput===0){
+                numOp.push({
+                    "num1": num1,
+                    "num2": num2,
+                    "num3": num3,
+                    "op": "+",
+                    "posInput": posInput,
+                })
                 return(
                     <div key={index}>
-                        <input type="number" required></input>
+                        <input type="number" id={"op"+index} required></input>
                         <span>+</span>
                         <span>{num2}</span>
                         <span>=</span>
@@ -49,24 +58,38 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                 )
             }
             else if(posInput===1){
+                numOp.push({
+                    "num1": num1,
+                    "num2": num2,
+                    "num3": num3,
+                    "op": "+",
+                    "posInput": posInput,
+                })
                 return(
                     <div key={index}>
                         <span>{num1}</span>
                         <span>+</span>
-                        <input type="number" required></input>
+                        <input type="number" id={"op"+index} required></input>
                         <span>=</span>
                         <span>{num3}</span>
                     </div>
                 )
             }
             else {
+                numOp.push({
+                    "num1": num1,
+                    "num2": num2,
+                    "num3": num3,
+                    "op": "+",
+                    "posInput": posInput,
+                })
                 return(
                     <div key={index}>
                         <span>{num1}</span>
                         <span>+</span>
                         <span>{num2}</span>
                         <span>=</span>
-                        <input type="number" required></input>
+                        <input type="number" id={"op"+index} required></input>
                     </div>
                 )
             }
@@ -79,9 +102,16 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
             }
             const num3 = arithmetic(arithmeticOpts[arithmeticOpt], num1, num2);
             if(posInput===0){
+                numOp.push({
+                    "num1": num1,
+                    "num2": num2,
+                    "num3": num3,
+                    "op": "-",
+                    "posInput": posInput,
+                })
                 return(
                     <div key={index}>
-                        <input type="number" required></input>
+                        <input type="number" id={"op"+index} required></input>
                         <span>-</span>
                         <span>{num2}</span>
                         <span>=</span>
@@ -90,24 +120,38 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                 )
             }
             else if(posInput===1){
+                numOp.push({
+                    "num1": num1,
+                    "num2": num2,
+                    "num3": num3,
+                    "op": "-",
+                    "posInput": posInput,
+                })
                 return(
                     <div key={index}>
                         <span>{num1}</span>
                         <span>-</span>
-                        <input type="number" required></input>
+                        <input type="number" id={"op"+index} required></input>
                         <span>=</span>
                         <span>{num3}</span>
                     </div>
                 )
             }
             else {
+                numOp.push({
+                    "num1": num1,
+                    "num2": num2,
+                    "num3": num3,
+                    "op": "-",
+                    "posInput": posInput,
+                })
                 return(
                     <div key={index}>
                         <span>{num1}</span>
                         <span>-</span>
                         <span>{num2}</span>
                         <span>=</span>
-                        <input type="number" required></input>
+                        <input type="number" id={"op"+index} required></input>
                     </div>
                 )
             }
@@ -155,7 +199,7 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                 num1 = num2;
                 num2 = numTemp;
             }
-            if(num2==0)
+            if(num2===0)
                 num2=1;
             const num3 = arithmetic(arithmeticOpts[arithmeticOpt], num1, num2);
             if(posInput===0){
@@ -191,17 +235,30 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                     </div>
                 )
             }
-       }  
-    } 
+       }
+    }
 
     function handleSubmit(e){
         e.preventDefault();
+        numOp.forEach((element, index) => {
+            const userAnswer = document.getElementById("op"+index).value;
+            testResult.push({
+                "num1": element.num1,
+                "num2": element.num2,
+                "num3": element.num3,
+                "op": element.op,
+                "posInput": element.posInput,
+                "userAnswer": userAnswer
+            })   
+        });
 
         if(preTest===true){
+            localStorage.setItem("preResult", JSON.stringify(testResult));
             history('/bomb', {state:{arithmeticOpts: arithmeticOpts, algorithmismSize: algorithmismSize}});
         }
         else{
-            history('/', {state:{arithmeticOpts: arithmeticOpts, algorithmismSize: algorithmismSize}});
+            localStorage.setItem("posResult", JSON.stringify(testResult));
+            history('/results', {state:{arithmeticOpts: arithmeticOpts, algorithmismSize: algorithmismSize}});
         }
     }
 
@@ -210,6 +267,7 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
             <div className="container">
                 <form className="form" onSubmit={handleSubmit}>
                     {amountQuestions.map(renderQuestions)}
+                    
 
                     <button className="button" type="submit">{preTest===true?"Continuar":"Ir para o menu principal"}</button>
                 </form>

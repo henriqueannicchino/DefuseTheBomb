@@ -1,0 +1,90 @@
+ul, li, p {
+	list-style: none;
+	font-size: 1.2rem;
+}
+
+h1 {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.main {
+	background-color: #EDEDEE;
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+.main span {
+	list-style: none;
+	font-size: 1.2rem;
+	margin: auto;
+}
+
+.buttonOver {
+	border-radius: 20px;
+	border: 1px solid lightcoral;
+	background-color: red;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+	padding: 12px 45px;
+	text-transform: uppercase;
+	cursor: pointer;
+	margin-top: 20px;
+}
+
+.flex{
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 100%;
+	margin: 0 auto;
+}
+
+.flex > div {
+	flex: 1 1 200px;
+	margin: 10px 10px;
+	background-color: whitesmoke;
+	border: 5px solid #474747;
+	border-radius: 10px;
+}
+
+.userData {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	align-content: center
+}
+
+.userData > li {
+	display: flex;
+	flex-wrap: wrap;
+	flex: 0 0 auto;
+	margin: 10px;
+}
+
+.test {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: start;
+	align-items: start;
+	align-content: center
+}
+
+.test > div {
+	display: flex;
+	flex-wrap: wrap;
+	flex: 0 0 auto;
+	margin: 5px;
+}
+
+.returnMenuButton {
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 50px;
+	justify-content: center
+}
+
+

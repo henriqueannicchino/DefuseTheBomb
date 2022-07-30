@@ -16,7 +16,7 @@ export default function PreTest() {
     useEffect(() => {
         if(location.state) {
             setLocationState(location.state);
-            localStorage.setItem('bombNum', 1);
+            localStorage.setItem('bombNum', 0);
             localStorage.setItem('refresh', true);
         }
         

@@ -2,8 +2,6 @@ import React, {useState} from "react";
 
 export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
 
-    const [answer, setAnswer] = useState(0);
-
     function arithmetic(operation, num1, num2){
         switch(operation) {
             case 'Soma':
@@ -20,7 +18,6 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
     }
 
     function renderTheQuestion(index){
-        
         let maxNum = 10, num1=1, num2=1;
         if(algorithmismSize!==NaN){
             maxNum = Math.pow(10,(parseInt(algorithmismSize)));
@@ -165,7 +162,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
                 num1 = num2;
                 num2 = numTemp;
             }
-            if(num2==0)
+            if(num2===0)
                 num2=1;
             const num3 = arithmetic(arithmeticOpts[arithmeticOpt], num1, num2);
             if(posInput===0){

@@ -18,6 +18,9 @@ export default function StartScreen(){
     localStorage.removeItem("posTime");
     localStorage.removeItem("playBeep");
     localStorage.removeItem("playDefuseBomb");
+    localStorage.removeItem("preResult");
+    localStorage.removeItem("posResult");
+    
 
 
     const [play, setPlay] = useState(false);

@@ -55,7 +55,6 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
 
     return (
         <div>
-            {console.log(localStorage.getItem('bombNum'))}
             {
                 bombExploded === false
                 ? <img src={bomb} alt="bomb" className="img" />

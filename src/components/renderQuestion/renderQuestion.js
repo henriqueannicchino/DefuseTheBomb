@@ -19,7 +19,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
 
     function renderTheQuestion(index){
         let maxNum = 10, num1=1, num2=1;
-        if(!isNaN(algorithmismSize)){
+        if(algorithmismSize!==NaN){
             maxNum = Math.pow(10,(parseInt(algorithmismSize)));
     
             num1 = Math.floor(Math.random() * ( maxNum!==0?maxNum:10 - 0)) + 0;

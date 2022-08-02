@@ -67,7 +67,7 @@ export default function BombImg({arithmeticOpts, algorithmismSize}) {
                     <h3>Você não conseguiu desarmar a bomba</h3>
                     
                     {
-                        parseInt(localStorage.getItem('bombNum')) < 5 
+                        parseInt(localStorage.getItem('bombNum')) < 3
                         ?
                         <Link to="/">
                             <button className="buttonOver" >Menu principal</button>

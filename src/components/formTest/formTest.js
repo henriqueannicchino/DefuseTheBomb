@@ -29,7 +29,7 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
         
         let maxNum = 10, num1=1, num2=1;
 
-        if(algorithmismSize!==NaN){
+        if(!isNaN(algorithmismSize)){
             maxNum = Math.pow(10,(parseInt(algorithmismSize)));
 
             num1 = Math.floor(Math.random() * ( maxNum!==0?maxNum:10 - 0)) + 0;
@@ -269,7 +269,7 @@ export default function FormTest({arithmeticOpts, sizeOpts, algorithmismSize, pr
                     {amountQuestions.map(renderQuestions)}
                     
 
-                    <button className="button" type="submit">{preTest===true?"Continuar":"Ir para o menu principal"}</button>
+                    <button className="button" type="submit">{preTest===true?"Continuar":"Ir para resultados"}</button>
                 </form>
             </div>
         </div>

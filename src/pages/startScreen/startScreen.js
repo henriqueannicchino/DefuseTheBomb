@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import { useLocation } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 import Popup from "../../components/popUp/popUp";
@@ -104,7 +103,7 @@ export default function StartScreen(){
         <div className="mainDiv" style={{background: "linear-gradient(rgba(136,17,7,0.5), rgba(195,18,0,255), black)"}}>
             
             <div className="menu">
-                <h1>Desarme a Bomba</h1>
+                <h1>Calculator Bomb</h1>
                 <div className="buttons">
                     <button onClick={() => setPlay(true)}>
                         JOGAR

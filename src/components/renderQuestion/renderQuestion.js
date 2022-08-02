@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 
 export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
 
@@ -19,7 +19,7 @@ export default function RenderQuestion({arithmeticOpts, algorithmismSize}){
 
     function renderTheQuestion(index){
         let maxNum = 10, num1=1, num2=1;
-        if(algorithmismSize!==NaN){
+        if(!isNaN(algorithmismSize)){
             maxNum = Math.pow(10,(parseInt(algorithmismSize)));
     
             num1 = Math.floor(Math.random() * ( maxNum!==0?maxNum:10 - 0)) + 0;
